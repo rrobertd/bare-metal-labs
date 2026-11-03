@@ -2,7 +2,6 @@
 
 Pure silicon. Only registers and datasheets. No HAL.
 
----
 
 ## Status:
 
