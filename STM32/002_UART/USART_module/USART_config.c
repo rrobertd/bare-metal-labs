@@ -2,8 +2,13 @@
 #include "stm32f0xx.h"
 
 void usart_cnfg(){
+
+    Map_USART2_CR1_UE = 0;
+    while Map_USART2_CR1_UE != 0{
+        __NOP();
+    }
     
-    // Must by written only if USART in disabled UE=0
+    // Must by written only if USART is disabled UE=0
     USART2->CR1 &= ~(Map_USART2_CR1_M0);
     USART2->CR1 &= ~(Map_USART2_CR1_M1);
     USART2->CR1 &= ~(Map_USART2_CR1_OVER8);
@@ -42,5 +47,10 @@ void usart_cnfg(){
     USART2->CR3 |= Map_USART2_CR3_DMAT;
     USART2->CR3 |= Map_USART2_CR3_DMAR;
     USART2->CR3 &= ~(Map_USART2_CR3_EIE);
+
+    Map_USART2_CR1_UE = 1;
+    while Map_USART2_CR1_UE != 1{
+        __NOP();
+    }
 
 }
